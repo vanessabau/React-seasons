@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import Spinner from "./Spinner";
 import SeasonDisplay from "./SeasonDisplay";
 
 class App extends React.Component {
@@ -28,14 +29,21 @@ class App extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <SeasonDisplay lat={this.state.lat} />
-        {/* Latitude: {this.state.lat} */}
-        <br />
-        {this.state.errorMessage}
-      </div>
-    );
+    if (
+      !this.state.errorMessage &&
+      !this.state.lat
+    ) {
+      return <Spinner />;
+    } else {
+      return (
+        <div>
+          <SeasonDisplay lat={this.state.lat} />
+          {/* Latitude: {this.state.lat} */}
+          <br />
+          {this.state.errorMessage}
+        </div>
+      );
+    }
   }
 }
 
